@@ -1,0 +1,339 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| organisation       |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.08 sec)
+
+mysql> use organisation;
+Database changed
+mysql> show tables;
+Empty set (0.02 sec)
+
+mysql> create table employee(emp_no int primary key , emp_name varchar(20),OB date ,ddress varchar(20) ,mobile_no int (15) ,salary(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(20))' at line 1
+mysql> create table employee(emp_no int primary key , emp_name varchar(20),OB date ,ddress varchar(20) ,mobile_no int (15) ,salary int(20));
+Query OK, 0 rows affected, 2 warnings (0.05 sec)
+
+mysql> create table department(dept_no int primary key , dept_name varcahr(20) , loacation varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varcahr(20) , loacation varchar(20))' at line 1
+mysql> create table department(dept_no int primary key , dept_name varchar(20) , loacation varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables ;
++------------------------+
+| Tables_in_organisation |
++------------------------+
+| department             |
+| employee               |
++------------------------+
+2 rows in set (0.01 sec)
+
+mysql> describe employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | NO   | PRI | NULL    |       |
+| emp_name  | varchar(20) | YES  |     | NULL    |       |
+| OB        | date        | YES  |     | NULL    |       |
+| ddress    | varchar(20) | YES  |     | NULL    |       |
+| mobile_no | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> discribe department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'discribe department' at line 1
+mysql> describe department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
+| loacation | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table employee add column dept_no ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee add column dept_no int(10);
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> alter table department add column sushant varchar(10);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe deaprtment
+    -> ;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> describe deaprtment;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> describe deapartment;
+ERROR 1146 (42S02): Table 'organisation.deapartment' doesn't exist
+mysql> describe department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
+| loacation | varchar(20) | YES  |     | NULL    |       |
+| sushant   | varchar(10) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table department drop column sushant;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
+| loacation | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> describe employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| emp_no    | int         | NO   | PRI | NULL    |       |
+| emp_name  | varchar(20) | YES  |     | NULL    |       |
+| OB        | date        | YES  |     | NULL    |       |
+| ddress    | varchar(20) | YES  |     | NULL    |       |
+| mobile_no | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| dept_no   | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into employee((101,'sushant',22022002,'jehanabad',7667473516,100000,1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'sushant',22022002,'jehanabad',7667473516,100000,1)' at line 1
+mysql> insert into employee(101,'sushant',22022002,'jehanabad',7667473516,100000,1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'sushant',22022002,'jehanabad',7667473516,100000,1)' at line 1
+mysql> insert into employee((101,'sushant',22022002,'jehanabad',7667473516,100000,1),(102,'rahul',23042003,'patna',4342542342,80000,2));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '101,'sushant',22022002,'jehanabad',7667473516,100000,1),(102,'rahul',23042003,'p' at line 1
+mysql> insert into employee values(101,'sushant',22022002,'jehanabad',7667473516,100000,1),(102,'rahul',23042003,'patna',4342542342,80000,2);
+ERROR 1292 (22007): Incorrect date value: '22022002' for column 'OB' at row 1
+mysql> insert into employee values(101,'sushant',22-02-2002,'jehanabad',7667473516,100000,1),(102,'rahul',23-04-2003,'patna',4342542342,80000,2);
+ERROR 1292 (22007): Incorrect date value: '-1982' for column 'OB' at row 1
+mysql> insert into employee values(101,'sushant',22/02/2002,'jehanabad',7667473516,100000,1),(102,'rahul',23/04/2003,'patna',4342542342,80000,2);
+ERROR 1264 (22003): Out of range value for column 'mobile_no' at row 1
+mysql> insert into employee values(101,'sushant',22/02/2002,'jehanabad',766747351,100000,1),(102,'rahul',23/04/2003,'patna',434254234,80000,2);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into employee values(101,'sushant',22/02/2002,'jehanabad',766747351,100000,1),(102,'rahul',23/04/2003,'patna',434254234,80000,2),(103,'vishu',25/07/2004,'jammu',65748493,90000,3);
+ERROR 1062 (23000): Duplicate entry '101' for key 'employee.PRIMARY'
+mysql> insert into employee values(103,'vishu',25/07/2004,'jammu',65748493,90000,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no |
++--------+----------+------------+-----------+-----------+--------+---------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 766747351 | 100000 |       1 |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 |
++--------+----------+------------+-----------+-----------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> isnert into department values(1,'maths','delhi'),(2,'physics','banglore'),(3,'chemistry','chennai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'isnert into department values(1,'maths','delhi'),(2,'physics','banglore'),(3,'ch' at line 1
+mysql> insert into department values(1,'maths','delhi'),(2,'physics','banglore'),(3,'chemistry','chennai');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from deaprtment;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> select * from department;
++---------+-----------+-----------+
+| dept_no | dept_name | loacation |
++---------+-----------+-----------+
+|       1 | maths     | delhi     |
+|       2 | physics   | banglore  |
+|       3 | chemistry | chennai   |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> alter table add foreign key(dept_no)referances department(dept_no);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add foreign key(dept_no)referances department(dept_no)' at line 1
+mysql> alter table employee add foreign key(dept_no)referances department(dept_no);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'referances department(dept_no)' at line 1
+mysql> alter table employee add foreign key(dept_no)references department(dept_no);
+Query OK, 3 rows affected (0.12 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select emp_no , emp-name from employee where dept_no=2;
+ERROR 1054 (42S22): Unknown column 'emp' in 'field list'
+mysql> select emp_no , emp_name from employee where dept_no=2;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+|    102 | rahul    |
++--------+----------+
+1 row in set (0.01 sec)
+
+mysql> alter table employee add column degisgnation varcahr(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varcahr(20)' at line 1
+mysql> alter table employee add column degisgnation varchar(20);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee set degisgnation='boss' where emp_no= 101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set degisgnation='manager' where emp_no= 102;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set degisgnation='peon' where emp_no=103;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 766747351 | 100000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_no , emp_name , degisgnation , dept_no , salary from employee where salary order by salary desc;
++--------+----------+--------------+---------+--------+
+| emp_no | emp_name | degisgnation | dept_no | salary |
++--------+----------+--------------+---------+--------+
+|    101 | sushant  | boss         |       1 | 100000 |
+|    103 | vishu    | peon         |       3 |  90000 |
+|    102 | rahul    | manager      |       2 |  80000 |
++--------+----------+--------------+---------+--------+
+3 rows in set (0.01 sec)
+
+mysql> select emp_no , emp_name , degisgnation, dept_no , mobile_no , salary where salary order by salary ince;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ince' at line 1
+mysql> select emp_no , emp_name , degisgnation, dept_no , mobile_no , salary where salary order by salary insc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insc' at line 1
+mysql> select emp_no , emp_name , degisgnation, dept_no , mobile_no , salary where salary order by salary asc;
+ERROR 1054 (42S22): Unknown column 'emp_no' in 'field list'
+mysql> select emp_no , emp_name , degisgnation, dept_no , mobile_no , salary fro, employee where salary order by salary asc;
+ERROR 1054 (42S22): Unknown column 'emp_no' in 'field list'
+mysql> select emp_no , emp_name , degisgnation, dept_no , mobile_no , salary from employee where salary order by salary asc;
++--------+----------+--------------+---------+-----------+--------+
+| emp_no | emp_name | degisgnation | dept_no | mobile_no | salary |
++--------+----------+--------------+---------+-----------+--------+
+|    102 | rahul    | manager      |       2 | 434254234 |  80000 |
+|    103 | vishu    | peon         |       3 |  65748493 |  90000 |
+|    101 | sushant  | boss         |       1 | 766747351 | 100000 |
++--------+----------+--------------+---------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_no , emp_name from employee where salary between 70000 and 95000;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+|    102 | rahul    |
+|    103 | vishu    |
++--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select deglisgnation from employee;
+ERROR 1054 (42S22): Unknown column 'deglisgnation' in 'field list'
+mysql> select degisgnation from employee;
++--------------+
+| degisgnation |
++--------------+
+| boss         |
+| manager      |
+| peon         |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> select dept_no , salary from employee;
++---------+--------+
+| dept_no | salary |
++---------+--------+
+|       1 | 100000 |
+|       2 |  80000 |
+|       3 |  90000 |
++---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select dept_no , salary from employee group by dept_no;
++---------+--------+
+| dept_no | salary |
++---------+--------+
+|       1 | 100000 |
+|       2 |  80000 |
+|       3 |  90000 |
++---------+--------+
+3 rows in set (0.01 sec)
+
+mysql> update employee set salary = 120000 where degisgnation='boss';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 766747351 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee set mobile_no=840949498 where degisgnation='boss';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql>  insert into employee values(104,'sashi',00/00/0000,'khusrupur',50000,4,'bathroom cleaner');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>  insert into employee values(104,'sashi',00/00/0000,'khusrupur',244153342,50000,4,'bathroom cleaner');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`organisation`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dept_no`) REFERENCES `department` (`dept_no`))
+mysql> delete from department where dept_no=3;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`organisation`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dept_no`) REFERENCES `department` (`dept_no`))
+mysql> select dept_no from employee where salary > 10000;
++---------+
+| dept_no |
++---------+
+|       1 |
+|       2 |
+|       3 |
++---------+
+3 rows in set (0.00 sec)
+
+mysql>
