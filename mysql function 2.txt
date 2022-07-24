@@ -1,0 +1,355 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use organisation;
+Database changed
+mysql> select * form employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form employee' at line 1
+mysql> select *from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from deaprtment
+    -> ;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> select * from deaprtment ;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> select * from department ;
++---------+-----------+-----------+
+| dept_no | dept_name | loacation |
++---------+-----------+-----------+
+|       1 | maths     | delhi     |
+|       2 | physics   | banglore  |
+|       3 | chemistry | chennai   |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|      290000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|  96666.6667 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(salary) from employee where emp_no=1,2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',2' at line 1
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|      120000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|       80000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(emp_no) from employee;
++-------------+
+| sum(emp_no) |
++-------------+
+|         306 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|      290000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee where dept_no=2;
++-------------+
+| avg(salary) |
++-------------+
+|  80000.0000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select max(salary) form employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee' at line 1
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|      120000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select lower('HELLO') from employee;
++----------------+
+| lower('HELLO') |
++----------------+
+| hello          |
+| hello          |
+| hello          |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select upper('hello') from employee;
++----------------+
+| upper('hello') |
++----------------+
+| HELLO          |
+| HELLO          |
+| HELLO          |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select ltrim('sushant') from employee;
++------------------+
+| ltrim('sushant') |
++------------------+
+| sushant          |
+| sushant          |
+| sushant          |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> select ltrim('      sushant') from employee;
++------------------------+
+| ltrim('      sushant') |
++------------------------+
+| sushant                |
+| sushant                |
+| sushant                |
++------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select ltrim('      sushant     ') from employee;
++-----------------------------+
+| ltrim('      sushant     ') |
++-----------------------------+
+| sushant                     |
+| sushant                     |
+| sushant                     |
++-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select ltrim('      sushant     ') from employee;
++-----------------------------+
+| ltrim('      sushant     ') |
++-----------------------------+
+| sushant                     |
+| sushant                     |
+| sushant                     |
++-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select replace('sushant and sashi','s','f' ) from dual;
++---------------------------------------+
+| replace('sushant and sashi','s','f' ) |
++---------------------------------------+
+| fufhant and fafhi                     |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select concat('sushant','saurav') from dual;
++----------------------------+
+| concat('sushant','saurav') |
++----------------------------+
+| sushantsaurav              |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select lpad('sushant',15,'*') from dual;
++------------------------+
+| lpad('sushant',15,'*') |
++------------------------+
+| ********sushant        |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select rpad('sushant',15,'&') from dual;
++------------------------+
+| rpad('sushant',15,'&') |
++------------------------+
+| sushant&&&&&&&&        |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select length('sushant') from dual;
++-------------------+
+| length('sushant') |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select length(emp_no) from employee;
++----------------+
+| length(emp_no) |
++----------------+
+|              3 |
+|              3 |
+|              3 |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select substr('sushantsaurav',3,6) from dual;
++-----------------------------+
+| substr('sushantsaurav',3,6) |
++-----------------------------+
+| shants                      |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select substr('sushantsaurav',3) from dual;
++---------------------------+
+| substr('sushantsaurav',3) |
++---------------------------+
+| shantsaurav               |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select instr(
+    -> 'sushantsaurav','saurav') from dual;
++----------------------------------+
+| instr(
+'sushantsaurav','saurav') |
++----------------------------------+
+|                                8 |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name,length(emp_name) from employee where emp_name like 's' or emp_name like 'v';
+Empty set (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> select emp_name,length(emp_name) from employee where emp_name like 's' or emp_name like 'v' order by emp_name;
+Empty set (0.01 sec)
+
+mysql> select emp_name,length(emp_name) from employee where emp_name like 's%' or emp_name like 'v%' order by emp_name;
++----------+------------------+
+| emp_name | length(emp_name) |
++----------+------------------+
+| sushant  |                7 |
+| vishu    |                5 |
++----------+------------------+
+2 rows in set (0.01 sec)
+
+mysql> select emp_name , emp_no from employee where length(emp_name)>5 or emp_name like 's%';
++----------+--------+
+| emp_name | emp_no |
++----------+--------+
+| sushant  |    101 |
++----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name , emp_no from employee where length(emp_name)>=5 or emp_name like 's%'oremp_name like 'v%' emp_name like 'r%' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'oremp_name like 'v%' emp_name like 'r%'' at line 1
+mysql> select emp_name , emp_no from employee where length(emp_name)>=5 or emp_name like 's%'or emp_name like 'v%' emp_name like 'r%' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_name like 'r%'' at line 1
+mysql> select left(emp_name,3) ,concat($,salary) from employee ;
+ERROR 1054 (42S22): Unknown column '$' in 'field list'
+mysql> select left(emp_name,3) ,concat('$',salary) from employee ;
++------------------+--------------------+
+| left(emp_name,3) | concat('$',salary) |
++------------------+--------------------+
+| sus              | $120000            |
+| rah              | $80000             |
+| vis              | $90000             |
++------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select left(emp_name,3) ,concat(salary,'$') from employee ;
++------------------+--------------------+
+| left(emp_name,3) | concat(salary,'$') |
++------------------+--------------------+
+| sus              | 120000$            |
+| rah              | 80000$             |
+| vis              | 90000$             |
++------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select right(mobile_no,4) ,emp_name from employee;
++--------------------+----------+
+| right(mobile_no,4) | emp_name |
++--------------------+----------+
+| 9498               | sushant  |
+| 4234               | rahul    |
+| 8493               | vishu    |
++--------------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select dept_no from employee union select dept_no from department;
++---------+
+| dept_no |
++---------+
+|       1 |
+|       2 |
+|       3 |
++---------+
+3 rows in set (0.01 sec)
+
+mysql> select * from department;
++---------+-----------+-----------+
+| dept_no | dept_name | loacation |
++---------+-----------+-----------+
+|       1 | maths     | delhi     |
+|       2 | physics   | banglore  |
+|       3 | chemistry | chennai   |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> delete dept_no=3 from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=3 from department' at line 1
+mysql> delete dept_no='3' from department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='3' from department' at line 1
+mysql> delete from department where dept_no=3;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`organisation`.`employee`, CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`dept_no`) REFERENCES `department` (`dept_no`))
+mysql> select dept_no from employee union all select dept_no from department;
++---------+
+| dept_no |
++---------+
+|       1 |
+|       2 |
+|       3 |
+|       1 |
+|       2 |
+|       3 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql>

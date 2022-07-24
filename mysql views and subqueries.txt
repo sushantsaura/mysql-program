@@ -1,0 +1,229 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use organisation;
+Database changed
+mysql> show tables;
++------------------------+
+| Tables_in_organisation |
++------------------------+
+| department             |
+| employee               |
++------------------------+
+2 rows in set (0.03 sec)
+
+mysql> selecct * from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecct * from employee' at line 1
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from deaprtment;
+ERROR 1146 (42S02): Table 'organisation.deaprtment' doesn't exist
+mysql> select * from department;
++---------+-----------+-----------+
+| dept_no | dept_name | loacation |
++---------+-----------+-----------+
+|       1 | maths     | delhi     |
+|       2 | physics   | banglore  |
+|       3 | chemistry | chennai   |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> create view emp_view as select * from employee where salary>85000;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from emp_view;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+2 rows in set (0.01 sec)
+
+mysql> create view dept_view as select dept_name , dept_no from department ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from dept_view;
++-----------+---------+
+| dept_name | dept_no |
++-----------+---------+
+| maths     |       1 |
+| physics   |       2 |
+| chemistry |       3 |
++-----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> drop emp_view ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_view' at line 1
+mysql> drop view emp_view;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop view dept_view;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select emp_name from employee where salary=(select max(salary) from employee);
++----------+
+| emp_name |
++----------+
+| sushant  |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select dept_name from department where dept_no=(select dept_no from employee where salary=(select max(salary) from employee));
++-----------+
+| dept_name |
++-----------+
+| maths     |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary>(select avg(salary) from employee);
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|  96666.6667 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select dept_name from department where dept_no=(select dept_no from employee where salary=(select max(salary) from employee));
++-----------+
+| dept_name |
++-----------+
+| maths     |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name from employee where dept_no=(select dept_name from department where dept_name ='maths','physics');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','physics')' at line 1
+mysql> select emp_name from employee where dept_no=(select dept_no from department where dept_name='maths','physics');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','physics')' at line 1
+mysql> select emp_name from employee where dept_no in(select dept_no from department where dept_name='maths','physics');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','physics')' at line 1
+mysql> select emp_name from employee where dept_no in(select dept_no from department where dept_name='maths' or dept_name ='physics');
++----------+
+| emp_name |
++----------+
+| sushant  |
+| rahul    |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select emp_name from employee where dept_no =(select dept_no from department where dept_name='maths' or dept_name ='physics');
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select emp_name from employee where dept_no in(select dept_no from department where dept_name='maths' or dept_name ='physics');
++----------+
+| emp_name |
++----------+
+| sushant  |
+| rahul    |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select emp_name from employee where salary>(select salary from employee where emp_no=3);
+Empty set (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_name from employee where salary>(select salary from employee where emp_no=103);
++----------+
+| emp_name |
++----------+
+| sushant  |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name from employee where salary>(select salary from employee where emp_no=102);
++----------+
+| emp_name |
++----------+
+| sushant  |
+| vishu    |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select emp_name from employee where ddress!=(select ddress from employee);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select emp_name from employee where ddress=(select ddress from employee);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select emp_name from employee where ddress in(select ddress from employee);
++----------+
+| emp_name |
++----------+
+| sushant  |
+| rahul    |
+| vishu    |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_name from employee where ddress in(select ddress from employee where emp_no=102);
++----------+
+| emp_name |
++----------+
+| rahul    |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name from employee where ddress=(select ddress from employee);
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select dept_name, dept_no from department where dept_no=(select dept_no from employee where salary=(select min(salary) from employee));
++-----------+---------+
+| dept_name | dept_no |
++-----------+---------+
+| physics   |       2 |
++-----------+---------+
+1 row in set (0.00 sec)
+
+mysql> selct emp_name from employee where salary>(select min(salary) from employee);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct emp_name from employee where salary>(select min(salary) from employee)' at line 1
+mysql> select emp_name from employee where salary>(select min(salary) from employee);
++----------+
+| emp_name |
++----------+
+| sushant  |
+| vishu    |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee group by salary order by salary desc limit 1,1;
++--------+----------+------------+--------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+--------+-----------+--------+---------+--------------+
+|    103 | vishu    | 0000-00-00 | jammu  |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+--------+-----------+--------+---------+--------------+
+1 row in set (0.01 sec)
+
+mysql>

@@ -1,0 +1,40 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select emp_name , ddress from employee where salary>(slelct avg(salary) from employee);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'avg(salary) from employee)' at line 1
+mysql> select emp_name , ddress from employee where salary>(select avg(salary) from employee);
+ERROR 1046 (3D000): No database selected
+mysql> use oeganisation;
+ERROR 1049 (42000): Unknown database 'oeganisation'
+mysql> use organisation;
+Database changed
+mysql> select emp_name , ddress from employee where salary>(select avg(salary) from employee);
++----------+-----------+
+| emp_name | ddress    |
++----------+-----------+
+| sushant  | jehanabad |
++----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name , emp_no from employee where salary<=(select max(salary) from employee);
++----------+--------+
+| emp_name | emp_no |
++----------+--------+
+| sushant  |    101 |
+| rahul    |    102 |
+| vishu    |    103 |
++----------+--------+
+3 rows in set (0.00 sec)
+
+m

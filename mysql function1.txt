@@ -1,0 +1,114 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use organisation;
+Database changed
+mysql> select * from employee;
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+| emp_no | emp_name | OB         | ddress    | mobile_no | salary | dept_no | degisgnation |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+|    101 | sushant  | 0000-00-00 | jehanabad | 840949498 | 120000 |       1 | boss         |
+|    102 | rahul    | 0000-00-00 | patna     | 434254234 |  80000 |       2 | manager      |
+|    103 | vishu    | 0000-00-00 | jammu     |  65748493 |  90000 |       3 | peon         |
++--------+----------+------------+-----------+-----------+--------+---------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from department;
++---------+-----------+-----------+
+| dept_no | dept_name | loacation |
++---------+-----------+-----------+
+|       1 | maths     | delhi     |
+|       2 | physics   | banglore  |
+|       3 | chemistry | chennai   |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> selecct sqrt(64) from dual;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecct sqrt(64) from dual' at line 1
+mysql> select sqrt(64) from dual;
++----------+
+| sqrt(64) |
++----------+
+|        8 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select abs(-16) from dual;
++----------+
+| abs(-16) |
++----------+
+|       16 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select mod(20,4) from dual;
++-----------+
+| mod(20,4) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select power(6,3) from dual;
++------------+
+| power(6,3) |
++------------+
+|        216 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select exp(23411.23) from daul;
+ERROR 1146 (42S02): Table 'organisation.daul' doesn't exist
+mysql> select exp(23411.23,2) from daul;
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'exp'
+mysql> select exp(19) from dual;
++--------------------+
+| exp(19)            |
++--------------------+
+| 178482300.96318725 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(98479988542,2) from dual;
++----------------------+
+| round(98479988542,2) |
++----------------------+
+|          98479988542 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select (9745.648568280,4) from dual;
+ERROR 1241 (21000): Operand should contain 1 column(s)
+mysql> select round(9745.648568280,4) from dual;
++-------------------------+
+| round(9745.648568280,4) |
++-------------------------+
+|               9745.6486 |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(emp_name) from employee ;
++-----------------+
+| count(emp_name) |
++-----------------+
+|               3 |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> select count(salary) from employee;
++---------------+
+| count(salary) |
++---------------+
+|             3 |
++---------------+
+1 row in set (0.00 sec)
