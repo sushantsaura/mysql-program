@@ -1,0 +1,25 @@
+DELIMITER $$
+create procedure employe()
+begin 
+declare sal int;
+declare empname varchar(25);
+declare sallevel varchar(25);
+declare v_finished int default 0;
+declare cur1 cursor FOR select salary,emp_name from employee;
+declare continue handler for not found set v_finished =1;
+open cur1;
+get_level:LOOP
+fetch cur1 into sal,empname;
+if sal>50000 then
+set sallevel="PLATINUM";
+ELSEIF sal<=50000 and sal>10000 THEN
+set sallevel="GOLD";
+else set sallevel="SILVER";
+end if;
+select empname,sallevel;
+if v_finished=1 THEN
+leave get_level;
+end if;
+end loop get_level;
+end $$
+DELIMITER ;
